@@ -63,7 +63,7 @@ def get_status(self):
 
         self.status = res
 
-   def show_status(self):
+def show_status(self):
         shared = self.status["shared"][self.serial]
         device = self.status["device"][self.serial]
 
@@ -73,12 +73,12 @@ def get_status(self):
         for k in sorted(allvars.keys()):
              print k + "."*(32-len(k)) + ":", allvars[k]
 
-    def show_curtemp(self):
+def show_curtemp(self):
         temp = self.status["shared"][self.serial]["current_temperature"]
         temp = self.temp_out(temp)
         print "%0.1f" % temp
-    
-    def temp_out(self, temp):
+
+def temp_out(self, temp):
         if (self.units == "F"):
             return temp*1.8 + 32.0
         else:
