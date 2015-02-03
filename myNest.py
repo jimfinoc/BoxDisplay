@@ -7,7 +7,7 @@ import time
 
 # Make sure your higher level directory has the JSON file called passwordFile.json
 # The file should contain the information in the JSON format. See below for an example
-# {"username": "email@somewhere.com", "password": "yourSuperSecretPassword!!!"
+# {"username": "email@somewhere.com", "password": "yourSuperSecretPassword!!!"}
 
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
