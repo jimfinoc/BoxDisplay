@@ -29,7 +29,7 @@ class Nest:
             res = json.read(res)
         return res
 
-def login(self):
+    def login(self):
         data = urllib.urlencode({"username": self.username, "password": self.password})
 
         req = urllib2.Request("https://home.nest.com/user/login",
@@ -44,7 +44,7 @@ def login(self):
         self.access_token = res["access_token"]
         self.userid = res["userid"]
         
-def get_status(self):
+    def get_status(self):
         req = urllib2.Request(self.transport_url + "/v2/mobile/user." + self.userid,
                               headers={"user-agent":"Nest/1.1.0.10 CFNetwork/548.0.4",
                                        "Authorization":"Basic " + self.access_token,
@@ -63,7 +63,7 @@ def get_status(self):
 
         self.status = res
 
-def show_status(self):
+    def show_status(self):
         shared = self.status["shared"][self.serial]
         device = self.status["device"][self.serial]
 
@@ -73,12 +73,12 @@ def show_status(self):
         for k in sorted(allvars.keys()):
              print k + "."*(32-len(k)) + ":", allvars[k]
 
-def show_curtemp(self):
+    def show_curtemp(self):
         temp = self.status["shared"][self.serial]["current_temperature"]
         temp = self.temp_out(temp)
         print "%0.1f" % temp
 
-def temp_out(self, temp):
+    def temp_out(self, temp):
         if (self.units == "F"):
             return temp*1.8 + 32.0
         else:
