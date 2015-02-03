@@ -17,7 +17,7 @@ def c_to_f(c):
 class Nest:
     def __init__(self, username, password, serial=None, index=0, units="F"):
         self.username = username
-               self.password = password
+        self.password = password
         self.serial = serial
         self.units = units
         self.index = index
