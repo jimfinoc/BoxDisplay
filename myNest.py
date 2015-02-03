@@ -44,7 +44,7 @@ def login(self):
         self.access_token = res["access_token"]
         self.userid = res["userid"]
         
-            def get_status(self):
+def get_status(self):
         req = urllib2.Request(self.transport_url + "/v2/mobile/user." + self.userid,
                               headers={"user-agent":"Nest/1.1.0.10 CFNetwork/548.0.4",
                                        "Authorization":"Basic " + self.access_token,
@@ -76,8 +76,8 @@ def login(self):
     def show_curtemp(self):
         temp = self.status["shared"][self.serial]["current_temperature"]
         temp = self.temp_out(temp)
-
         print "%0.1f" % temp
+    
     def temp_out(self, temp):
         if (self.units == "F"):
             return temp*1.8 + 32.0
