@@ -5,7 +5,7 @@ import sys
 import json
 import time
 
-fileData = open('passwordFile.json')
+fileData = open('./passwordFile.json')
 usernameAndPassword = json.load(fileData)
 #print "username:" + str(usernameAndPassword['username'])
 #print "password:" + str(usernameAndPassword['password'])
