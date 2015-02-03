@@ -110,16 +110,12 @@ print  c_to_f(n1.status["shared"][n1.serial]["current_temperature"])
 print "Upstairs Humidity"
 print n1.status["device"][n1.serial]["current_humidity"]
 
-
+print ""
 #print "Downstairs Time Stamp"
 #print  n0.status["shared"][n0.serial]["$timestamp"]
-
-print ""
 print "Downstairs Temperature"
 #n0.show_curtemp()
 print  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
-
-
 print "Downstairs Humidity"
 print n0.status["device"][n0.serial]["current_humidity"]
 
