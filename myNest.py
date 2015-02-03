@@ -5,6 +5,10 @@ import sys
 import json
 import time
 
+# Make sure your higher level directory has the JSON file called passwordFile.json
+# The file should contain the information in the JSON format. See below for an example
+# {"username": "email@somewhere.com", "password": "yourSuperSecretPassword!!!"
+
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
 #print "username:" + str(usernameAndPassword['username'])
@@ -97,7 +101,6 @@ n1.get_status()
 n0.get_status()
 
 print""
-print""
 #print "Upstairs Time Stamp"
 #print time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(n1.status["shared"][n1.serial]["$timestamp"]))
 #print  n1.status["shared"][n1.serial]["$timestamp"]
@@ -111,7 +114,7 @@ print n1.status["device"][n1.serial]["current_humidity"]
 #print "Downstairs Time Stamp"
 #print  n0.status["shared"][n0.serial]["$timestamp"]
 
-
+print ""
 print "Downstairs Temperature"
 #n0.show_curtemp()
 print  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
