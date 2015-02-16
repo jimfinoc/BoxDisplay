@@ -4,7 +4,7 @@ import urllib2
 import sys
 import json
 import time
-from Adafruit_7Segment import SevenSegment
+from Adafruit_7SegmentPlus import SevenSegment
 
 
 # Make sure your higher level directory has the JSON file called passwordFile.json
@@ -73,8 +73,8 @@ class Nest:
 
 def displayTemperature(segment = SevenSegment(address=0x70), temperature = None):
     "this will display the temperature on the specific segment"
+    segment.disp.clear()
     if (temperature==None):
-        segment.disp.clear()
         segment.writeDigit(4, 0xF)
         return False
     else:
@@ -86,6 +86,16 @@ def displayTemperature(segment = SevenSegment(address=0x70), temperature = None)
 
 def displayHumidity(segment = SevenSegment(address=0x70), humidiity = None):
     "this will display the humidiity on the specific segment"
+    segment.disp.clear()
+    if (humidiity==None):
+        segment.writeDigit(0, 0xF)
+        return False
+    else:
+        segment.writeDigit(0, int(humidiity) / 10)      	# Tens
+#        segment.writeDigit(1, int(temperature) % 10, True)  	# blank
+        segment.writeDigit(3, int(humidiity) * 10 % 10)	# Tens
+        segment.writeDigit(4, int(humidiity) * 10 % 10) # Ones
+        return True
 
 def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the time on the specific segment"
@@ -96,10 +106,14 @@ def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
 
-print "Initalizing the displays."
+print "Initalizing the displays"
 segmentLevelBase = SevenSegment(address=0x70)
 segmentLevelZero = SevenSegment(address=0x72)
 segmentLevelOne = SevenSegment(address=0x74)
+print " Setting brightness"
+segmentLevelBase.disp.setBrightness(10)
+segmentLevelZero.disp.setBrightness(10)
+segmentLevelOne.disp.setBrightness(10)
 
 
 print "My Nest Data"
@@ -118,15 +132,35 @@ print""
 print "Level One Temperature"
 levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
 print levelOneTemperature
-displayTemperature(segmentLevelOne,levelOneTemperature)
 
-print "Upstairs Humidity"
+print "Level One Humidity"
 levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
 print levelOneHumidity
 print ""
+
 print "Level Zero Temperature"
 levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
 print levelZeroTemperature
-print "Downstairs Humidity"
+
+print""
+print "Level Zero Humidity"
 levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
 print levelZeroHumidity
+
+
+print "Level Base Temperature"
+#levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
+print ""
+#displayTemperature(segmentLevelZero,levelZeroTemperature)
+
+print""
+print "Level Base Humidity"
+#levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
+print ""
+
+
+displayTemperature(segmentLevelOne,levelOneTemperature)
+displayTemperature(segmentLevelZero,levelZeroTemperature)
+time.sleep(4)
+displayHumidity(segmentLevelOne,levelOneHumidity)
+displayHumidity(segmentLevelZero,levelZeroHumidity)
