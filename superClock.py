@@ -250,7 +250,7 @@ def main():
             print ""
             print "initial routine finished"
             print
-        if (cmd=="repeat")
+        if (cmd=="repeat"):
             looping == True
         else
             looping == False
