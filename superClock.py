@@ -20,6 +20,8 @@ BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8) #for using Prin
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
 valueTimeDate = None
+loopingQuestion == True
+
 #print "username:" + str(usernameAndPassword['username'])
 #print "password:" + str(usernameAndPassword['password'])
 
@@ -138,7 +140,7 @@ def help():
     print "    superClock.py repeat"
     print ""
 
-loopingQuestion == True
+
 def main():
     parser = create_parser()
     (opts, args) = parser.parse_args()
