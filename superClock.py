@@ -254,7 +254,7 @@ def main():
         print ""
         if (cmd=="repeat"):
             looping == True
-        else
+else:
             looping == False
 
 if __name__=="__main__":
