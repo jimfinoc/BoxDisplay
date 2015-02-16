@@ -166,7 +166,7 @@ print "Level Base Time"
 print levelBaseTime
 print "Level Base Temperature"
 print levelBaseTemperature
-print "The value of the webpage temp 
+print "The value of the webpage temp"
 print levelBaseHumidity
 
 print ""
