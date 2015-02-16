@@ -149,7 +149,7 @@ def main():
         cmd = "onetime"
     else:
         cmd = args[0]
-print cmd
+    print cmd
     parser = create_parser()
     (opts, args) = parser.parse_args()
 
