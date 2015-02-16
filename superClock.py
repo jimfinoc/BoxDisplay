@@ -84,16 +84,16 @@ def displayTemperature(segment = SevenSegment(address=0x70), temperature = None)
         segment.writeDigit(4, 0xF)					        # F
         return True
 
-def displayHumidity(segment = SevenSegment(address=0x70), humidiity):
+def displayHumidity(segment = SevenSegment(address=0x70), humidiity = None):
     "this will display the humidiity on the specific segment"
 
-def displayTime(segment = SevenSegment(address=0x70),valueTimeDate):
+def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the time on the specific segment"
 
-def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate):
+def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the day and month on the specific segment"
 
-def displayYear(segment = SevenSegment(address=0x70),valueTimeDate):
+def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
 
 print"My Nest Data"
