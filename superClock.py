@@ -113,18 +113,12 @@ def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
 
 def create_parser():
-    parser = OptionParser(usage="nest [options] command [command_options] [command_args]",
-                          description="Commands: fan temp",
-                          version="unknown")
-#    parser.add_option("-u", "--onetime", dest="user",
-#                      help="username for nest.com", metavar="USER", default=None)
-#    parser.add_option("-p", "--repeat", dest="password",
-#                      help="password for nest.com", metavar="PASSWORD", default=None)
+    parser = OptionParser(usage="superClock [options] command [command_options] [command_args]",
+                          description="Commands: help",
+                          version="1")
 #    parser.add_option("-c", "--celsius", dest="celsius", action="store_true", default=False,
 #                      help="use celsius instead of farenheit")
-
-                            
-                            return parser
+    return parser
 
 
 def help():
