@@ -6,6 +6,7 @@ import json
 import time
 import requests
 from Adafruit_7SegmentPlus import SevenSegment
+import myColorText
 
 
 # Make sure your higher level directory has the JSON file called passwordFile.json
@@ -15,6 +16,7 @@ from Adafruit_7SegmentPlus import SevenSegment
 
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
+valueTimeDate = None
 #print "username:" + str(usernameAndPassword['username'])
 #print "password:" + str(usernameAndPassword['password'])
 
@@ -149,14 +151,14 @@ try:
     levelBaseHumidity = float(r.json()["humidity"])
     levelBaseTime = str(r.json()["localTime"])
 except:
-    print "setting base to None"
+    print " setting base to None"
     levelBaseTemperature = None
     levelBaseHumidity = None
     levelBaseTime = None
 
 print""
 print "Level One Temperature"
-print levelOneTemperature
+printColor(str(levelOneTemperature))
 print "Level One Humidity"
 print levelOneHumidity
 
@@ -176,18 +178,28 @@ print levelBaseHumidity
 
 print ""
 print "sending temp data to the external displays"
+displayTime(segmentLevelOne,valueTimeDate)
+displayDayMonth(segmentLevelZero,valueTimeDate)
+displayYear(segmentLevelBase, valueTimeDate)
+
+print""
+print "sleeping for 4 seconds"
+time.sleep(4)
+print "sending temp data to the external displays"
 displayTemperature(segmentLevelOne,levelOneTemperature)
 displayTemperature(segmentLevelZero,levelZeroTemperature)
 displayTemperature(segmentLevelBase, levelBaseTemperature)
-print "sleeping for 4 seconds"
+
+print ""
+print "sleeping for 4 more seconds"
 time.sleep(4)
 print "sending humid data to the external displays"
 displayHumidity(segmentLevelOne,levelOneHumidity)
 displayHumidity(segmentLevelZero,levelZeroHumidity)
 displayHumidity(segmentLevelBase, levelBaseHumidity)
-print "sleeping for 4 more seconds"
+print "sleeping for another 4 seconds"
 time.sleep(4)
-print "program finished"
 
-#displayTemperature(segmentLevelZero,levelZeroTemperature)
-#levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
+print ""
+print "initial routine finished"
+
