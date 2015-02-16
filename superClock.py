@@ -96,7 +96,13 @@ def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
 
-print"My Nest Data"
+print "Initalizing the displays."
+segmentLevelBase = SevenSegment(address=0x70)
+segmentLevelZero = SevenSegment(address=0x72)
+segmentLevelOne = SevenSegment(address=0x74)
+
+
+print "My Nest Data"
 n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Level Zero
 n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Level One
 print " Logging On"
@@ -106,10 +112,14 @@ print " Getting Status"
 n1.get_status()
 n0.get_status()
 
+
+
 print""
 print "Level One Temperature"
 levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
 print levelOneTemperature
+displayTemperature(segmentLevelOne,levelOneTemperature)
+
 print "Upstairs Humidity"
 levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
 print levelOneHumidity
