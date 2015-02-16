@@ -146,7 +146,7 @@ try:
     r = requests.get("http://10.0.1.211")
     print " pulling values"
     levelBaseTemperature = float(r.json()["temperature"])
-    levelBaseHumidity = str(r.json()["humidity"])
+    levelBaseHumidity = float(r.json()["humidity"])
     levelBaseTime = str(r.json()["localTime"])
 except:
     print "setting base to None"
