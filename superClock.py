@@ -20,7 +20,6 @@ BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8) #for using Prin
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
 valueTimeDate = None
-loopingQuestion = True
 
 #print "username:" + str(usernameAndPassword['username'])
 #print "password:" + str(usernameAndPassword['password'])
@@ -180,6 +179,7 @@ def main():
         n0.login()
     except:
         print " Nest.com intial failure"
+    loopingQuestion = True
     while (loopingQuestion):
         try:
             print " Getting Status"
