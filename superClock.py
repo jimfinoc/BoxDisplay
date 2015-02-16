@@ -141,13 +141,14 @@ def help():
 def main():
     parser = create_parser()
     (opts, args) = parser.parse_args()
-    cmd = args[0]
-    if (cmd=="help"):
-        help()
-        sys.exit(-1)
     if (len(args)==0):
         help()
         cmd = "onetime"
+    else:
+        cmd = args[0]
+    if (cmd=="help"):
+        help()
+        sys.exit(-1)
     try:
         print "Initalizing the displays"
         segmentLevelBase = SevenSegment(address=0x70)
