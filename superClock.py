@@ -91,7 +91,7 @@ def displayHumidity(segment = SevenSegment(address=0x70), humidiity = None):
         segment.writeDigit(0, 0xF)
         return False
     else:
-        segment.writeDigit(0, int(humidiity) / 10)      	# Tens
+        segment.setSpecialH(0) # displays an H in the 0 position
 #        segment.writeDigit(1, int(temperature) % 10, True)  	# blank
         segment.writeDigit(3, int(humidiity) * 10 % 10)	# Tens
         segment.writeDigit(4, int(humidiity) * 10 % 10) # Ones
