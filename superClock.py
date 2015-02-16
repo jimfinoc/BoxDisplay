@@ -138,10 +138,10 @@ def help():
     print "    superClock.py repeat"
     print ""
 
+looping == True
 def main():
     parser = create_parser()
     (opts, args) = parser.parse_args()
-    looping == True
     if (len(args)==0):
         help()
         cmd = "onetime"
