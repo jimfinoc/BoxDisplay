@@ -259,9 +259,9 @@ def main():
         print "initial routine finished"
         print ""
         if (cmd=="repeat"):
-            loopingQuestion == True
+            loopingQuestion = True
         else:
-            loopingQuestion == False
+            loopingQuestion = False
 
 if __name__=="__main__":
     main()
