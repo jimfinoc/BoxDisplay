@@ -144,9 +144,9 @@ cmd = ""
 
 if (len(args)==0):
     help()
-        cmd = "onetime"
-    else:
-        cmd = args[0]
+    cmd = "onetime"
+else:
+    cmd = args[0]
 
 def main():
     print cmd
