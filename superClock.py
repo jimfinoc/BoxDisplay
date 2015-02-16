@@ -140,16 +140,16 @@ def help():
     print "    superClock.py repeat"
     print ""
 
-cmd = ""
-
-if (len(args)==0):
-    help()
-    cmd = "onetime"
-else:
-    cmd = args[0]
 
 def main():
-    print cmd
+    cmd = ""
+    
+    if (len(args)==0):
+        help()
+        cmd = "onetime"
+    else:
+        cmd = args[0]
+print cmd
     parser = create_parser()
     (opts, args) = parser.parse_args()
 
