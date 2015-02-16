@@ -141,6 +141,7 @@ def help():
 def main():
     parser = create_parser()
     (opts, args) = parser.parse_args()
+    looping == True
     if (len(args)==0):
         help()
         cmd = "onetime"
@@ -173,8 +174,6 @@ def main():
         n0.login()
     except:
         print " Nest.com intial failure"
-
-    looping == True
     while looping:
         try:
             print " Getting Status"
