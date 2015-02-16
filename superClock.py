@@ -116,6 +116,7 @@ segmentLevelBase.disp.setBrightness(10)
 segmentLevelZero.disp.setBrightness(10)
 segmentLevelOne.disp.setBrightness(10)
 
+print ""
 print "Trying to get data from the Nest Web"
 try:
     print "My Nest Data"
@@ -132,19 +133,23 @@ try:
     levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
     levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
 except:
+    print "setting One and Zero to None"
     levelOneTemperature = None
     levelOneHumidity = None
     levelZeroTemperature = None
     levelZeroHumidity = None
 
-
+print ""
 print "Getting data from the internal web device"
 try:
+    print " getting the date from the site"
     r = requests.get("http://10.0.1.211")
+    print " pulling values"
     levelBaseTemperature = float(r.json()["temperature"])
-    levelBaseHumidity = str(r.json()["localTime"])
+    levelBaseHumidity = str(r.json()["humidity"])
     levelBaseTime = str(r.json()["localTime"])
 except:
+    print "setting base to None"
     levelBaseTemperature = None
     levelBaseHumidity = None
     levelBaseTime = None
@@ -170,14 +175,19 @@ print "The value of the webpage temp"
 print levelBaseHumidity
 
 print ""
-print "sending data to the external displays"
+print "sending temp data to the external displays"
 displayTemperature(segmentLevelOne,levelOneTemperature)
 displayTemperature(segmentLevelZero,levelZeroTemperature)
 displayTemperature(segmentLevelBase, levelBaseTemperature)
+print "sleeping for 4 seconds"
 time.sleep(4)
+print "sending humid data to the external displays"
 displayHumidity(segmentLevelOne,levelOneHumidity)
 displayHumidity(segmentLevelZero,levelZeroHumidity)
 displayHumidity(segmentLevelBase, levelBaseHumidity)
+print "sleeping for 4 more seconds"
 time.sleep(4)
+print "program finished"
+
 #displayTemperature(segmentLevelZero,levelZeroTemperature)
 #levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
