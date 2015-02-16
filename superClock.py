@@ -254,6 +254,7 @@ def main():
         print ""
         print "initial routine finished"
         print ""
+        print cmd
         if (cmd=="repeat"):
             loopingQuestion == True
         else:
