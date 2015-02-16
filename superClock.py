@@ -6,6 +6,7 @@ import json
 import time
 import requests
 from Adafruit_7SegmentPlus import SevenSegment
+from optparse import OptionParser
 import myColorText
 
 
@@ -111,98 +112,154 @@ def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
 
-print "Initalizing the displays"
-segmentLevelBase = SevenSegment(address=0x70)
-segmentLevelZero = SevenSegment(address=0x72)
-segmentLevelOne = SevenSegment(address=0x74)
-print " Setting brightness"
-segmentLevelBase.disp.setBrightness(10)
-segmentLevelZero.disp.setBrightness(10)
-segmentLevelOne.disp.setBrightness(10)
+def create_parser():
+    parser = OptionParser(usage="nest [options] command [command_options] [command_args]",
+                          description="Commands: fan temp",
+                          version="unknown")
+#    parser.add_option("-u", "--onetime", dest="user",
+#                      help="username for nest.com", metavar="USER", default=None)
+#    parser.add_option("-p", "--repeat", dest="password",
+#                      help="password for nest.com", metavar="PASSWORD", default=None)
+#    parser.add_option("-c", "--celsius", dest="celsius", action="store_true", default=False,
+#                      help="use celsius instead of farenheit")
 
-print ""
-print "Trying to get data from the Nest Web"
-try:
-    print "My Nest Data"
-    n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Level Zero
-    n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Level One
-    print " Logging On"
-    n1.login()
-    n0.login()
-    print " Getting Status"
-    n1.get_status()
-    n0.get_status()
-    levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
-    levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
-    levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
-    levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
-except:
-    print "setting One and Zero to None"
-    levelOneTemperature = None
-    levelOneHumidity = None
-    levelZeroTemperature = None
-    levelZeroHumidity = None
-
-print ""
-print "Getting data from the internal web device"
-try:
-    print " getting the date from the site"
-    r = requests.get("http://10.0.1.211")
-    print " pulling values"
-    levelBaseTemperature = float(r.json()["temperature"])
-    levelBaseHumidity = float(r.json()["humidity"])
-    levelBaseTime = str(r.json()["localTime"])
-except:
-    print " setting base to None"
-    levelBaseTemperature = None
-    levelBaseHumidity = None
-    levelBaseTime = None
-
-print""
-print "Level One Temperature"
-myColorText.printColor(str(levelOneTemperature), YELLOW) #colors are for readability
-print "Level One Humidity"
-myColorText.printColor(str(levelOneHumidity), YELLOW) #colors are for readability
+                            
+                            return parser
 
 
-print ""
-print "Level Zero Temperature"
-myColorText.printColor(str(levelZeroTemperature), GREEN) #colors are for readability
-print "Level Zero Humidity"
-myColorText.printColor(str(levelZeroHumidity), GREEN) #colors are for readability
+def help():
+    print "syntax: superClock [options]"
+    print "options:"
+    print "   --celsius              ... Celsius instead of Farenheit. not yet implemented."
+    print ""
+    print "commands: help, onetime, repeat"
+    print "   help                 ... this menu"
+    print "   onetime              ... default command (with help if omited)"
+    print "   repeat               ... runs forever"
+    #future development would allow a finite repeat numnber and a seperate mode for continous
+    print ""
+    print "examples:"
+    print "    superClock.py help"
+    print "    superClock.py onetime"
+    print "    superClock.py repeat"
+    print ""
 
-print ""
-print "Level Base Time"
-myColorText.printColor(str(levelBaseTime), RED) #colors are for readability
-print "Level Base Temperature"
-myColorText.printColor(str(levelBaseTemperature), RED) #colors are for readability
-print "The value of the webpage temp"
-myColorText.printColor(str(levelBaseHumidity), RED) #colors are for readability
+def main():
+    parser = create_parser()
+    (opts, args) = parser.parse_args()
+    cmd = args[0]
+    if (cmd=="help"):
+        help()
+        sys.exit(-1)
+    if (len(args)==0):
+        help()
+        cmd = "onetime"
+    try:
+        print "Initalizing the displays"
+        segmentLevelBase = SevenSegment(address=0x70)
+        segmentLevelZero = SevenSegment(address=0x72)
+        segmentLevelOne = SevenSegment(address=0x74)
+        print " Setting brightness"
+        segmentLevelBase.disp.setBrightness(10)
+        segmentLevelZero.disp.setBrightness(10)
+        segmentLevelOne.disp.setBrightness(10)
+    except:
+        print "could not initalize the three seven segment displays"
+        sys.exit(-1)
 
-print ""
-print "sending temp data to the external displays"
-displayTime(segmentLevelOne,valueTimeDate)
-displayDayMonth(segmentLevelZero,valueTimeDate)
-displayYear(segmentLevelBase, valueTimeDate)
+    print ""
+    print "Trying to get data from the Nest Web"
+    try:
+        print "My Nest Data"
+        n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Level Zero
+        n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Level One
+        print " Logging On"
+        n1.login()
+        n0.login()
+    except:
+        print " Nest.com intial failure"
 
-print""
-print "sleeping for 4 seconds"
-time.sleep(4)
-print "sending temp data to the external displays"
-displayTemperature(segmentLevelOne,levelOneTemperature)
-displayTemperature(segmentLevelZero,levelZeroTemperature)
-displayTemperature(segmentLevelBase, levelBaseTemperature)
+    looping == True
+    while looping:
+        try:
+            print " Getting Status"
+            n1.get_status()
+            n0.get_status()
+            levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
+            levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
+            levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
+            levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
+        except:
+            print " Nest.com failed. Setting Level's One and Zero to None"
+            levelOneTemperature = None
+            levelOneHumidity = None
+            levelZeroTemperature = None
+            levelZeroHumidity = None
+        print ""
+        print "Getting data from the internal web device"
+        try:
+            print " getting the date from the site"
+            r = requests.get("http://10.0.1.211")
+            print " pulling values"
+            levelBaseTemperature = float(r.json()["temperature"])
+            levelBaseHumidity = float(r.json()["humidity"])
+            levelBaseTime = str(r.json()["localTime"])
+        except:
+            print " setting Level Base to None"
+            levelBaseTemperature = None
+            levelBaseHumidity = None
+            levelBaseTime = None
+        try:
+            print ""
+            print "trying to use color output"
+            print "Level One Temperature"
+            myColorText.printColor(str(levelOneTemperature), YELLOW) #colors are for readability
+            print "Level One Humidity"
+            myColorText.printColor(str(levelOneHumidity), YELLOW) #colors are for readability
+            print ""
+            print "Level Zero Temperature"
+            myColorText.printColor(str(levelZeroTemperature), GREEN) #colors are for readability
+            print "Level Zero Humidity"
+            myColorText.printColor(str(levelZeroHumidity), GREEN) #colors are for readability
+            print ""
+            print "Level Base Time"
+            myColorText.printColor(str(levelBaseTime), RED) #colors are for readability
+            print "Level Base Temperature"
+            myColorText.printColor(str(levelBaseTemperature), RED) #colors are for readability
+            print "The value of the webpage temp"
+            myColorText.printColor(str(levelBaseHumidity), RED) #colors are for readability
+            print ""
+        except:
+            print " cannot print in color"
+        try:
+            print ""
+            print "Sending temp data to the external displays"
+            displayTime(segmentLevelOne,valueTimeDate)
+            displayDayMonth(segmentLevelZero,valueTimeDate)
+            displayYear(segmentLevelBase, valueTimeDate)
+            print""
+            print "sleeping for 4 seconds"
+            time.sleep(4)
+            print "sending temp data to the external displays"
+            displayTemperature(segmentLevelOne,levelOneTemperature)
+            displayTemperature(segmentLevelZero,levelZeroTemperature)
+            displayTemperature(segmentLevelBase, levelBaseTemperature)
+            print ""
+            print "sleeping for 4 more seconds"
+            time.sleep(4)
+            print "sending humid data to the external displays"
+            displayHumidity(segmentLevelOne,levelOneHumidity)
+            displayHumidity(segmentLevelZero,levelZeroHumidity)
+            displayHumidity(segmentLevelBase, levelBaseHumidity)
+            print "sleeping for another 4 seconds"
+            time.sleep(4)
+            print ""
+            print "initial routine finished"
+            print
+        if (cmd=="repeat")
+            looping == True
+        else
+            looping == False
 
-print ""
-print "sleeping for 4 more seconds"
-time.sleep(4)
-print "sending humid data to the external displays"
-displayHumidity(segmentLevelOne,levelOneHumidity)
-displayHumidity(segmentLevelZero,levelZeroHumidity)
-displayHumidity(segmentLevelBase, levelBaseHumidity)
-print "sleeping for another 4 seconds"
-time.sleep(4)
-
-print ""
-print "initial routine finished"
-
+if __name__=="__main__":
+    main()
