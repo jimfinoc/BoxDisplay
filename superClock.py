@@ -20,7 +20,7 @@ BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8) #for using Prin
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
 valueTimeDate = None
-loopingQuestion == True
+loopingQuestion = True
 
 #print "username:" + str(usernameAndPassword['username'])
 #print "password:" + str(usernameAndPassword['password'])
