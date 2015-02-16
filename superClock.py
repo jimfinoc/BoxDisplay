@@ -4,6 +4,8 @@ import urllib2
 import sys
 import json
 import time
+from Adafruit_7Segment import SevenSegment
+
 
 # Make sure your higher level directory has the JSON file called passwordFile.json
 # The file should contain the information in the JSON format. See below for an example
@@ -69,25 +71,52 @@ class Nest:
 # below will increment accordingly. If you only have one, it should just be 0. You have to create an object 
 # for each nest thermostat. You could also specify the thermostats by serial number instead of the index.
 
+def displayTemperature(segment = SevenSegment(address=0x70), temperature = None):
+    "this will display the temperature on the specific segment"
+    if (temperature==None):
+        segment.disp.clear()
+        segment.writeDigit(4, 0xF)
+        return False
+    else:
+        segment.writeDigit(0, int(temperature) / 10)      	# Tens
+        segment.writeDigit(1, int(temperature) % 10, True)  	# Ones
+        segment.writeDigit(3, int(temperature) * 10 % 10)	# Tenths
+        segment.writeDigit(4, 0xF)					        # F
+        return True
+
+def displayHumidity(segment = SevenSegment(address=0x70), humidiity):
+    "this will display the humidiity on the specific segment"
+
+def displayTime(segment = SevenSegment(address=0x70),valueTimeDate):
+    "this will display the time on the specific segment"
+
+def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate):
+    "this will display the day and month on the specific segment"
+
+def displayYear(segment = SevenSegment(address=0x70),valueTimeDate):
+    "this will display the year on the specific segment"
+
 print"My Nest Data"
-n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Downstairs
-n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Upstairs
+n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Level Zero
+n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Level One
 print " Logging On"
 n1.login()
 n0.login()
 print " Getting Status"
 n1.get_status()
-
 n0.get_status()
 
 print""
-print "Upstairs Temperature"
-print  c_to_f(n1.status["shared"][n1.serial]["current_temperature"])
+print "Level One Temperature"
+levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
+print levelOneTemperature
 print "Upstairs Humidity"
-print n1.status["device"][n1.serial]["current_humidity"]
-
+levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
+print levelOneHumidity
 print ""
-print "Downstairs Temperature"
-print  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
+print "Level Zero Temperature"
+levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
+print levelZeroTemperature
 print "Downstairs Humidity"
-print n0.status["device"][n0.serial]["current_humidity"]
+levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
+print levelZeroHumidity
