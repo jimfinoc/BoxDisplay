@@ -4,6 +4,7 @@ import urllib2
 import sys
 import json
 import time
+import requests
 from Adafruit_7SegmentPlus import SevenSegment
 
 
@@ -115,53 +116,68 @@ segmentLevelBase.disp.setBrightness(10)
 segmentLevelZero.disp.setBrightness(10)
 segmentLevelOne.disp.setBrightness(10)
 
+print "Trying to get data from the Nest Web"
+try:
+    print "My Nest Data"
+    n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Level Zero
+    n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Level One
+    print " Logging On"
+    n1.login()
+    n0.login()
+    print " Getting Status"
+    n1.get_status()
+    n0.get_status()
+    levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
+    levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
+    levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
+    levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
+except:
+    levelOneTemperature = None
+    levelOneHumidity = None
+    levelZeroTemperature = None
+    levelZeroHumidity = None
 
-print "My Nest Data"
-n0 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 0) #Level Zero
-n1 = Nest(usernameAndPassword['username'],usernameAndPassword['password'], None, 1) #Level One
-print " Logging On"
-n1.login()
-n0.login()
-print " Getting Status"
-n1.get_status()
-n0.get_status()
 
-
+print "Getting data from the internal web device"
+try:
+    r = requests.get("http://10.0.1.211")
+    levelBaseTemperature = float(r.json()["temperature"])
+    levelBaseHumidity = str(r.json()["localTime"])
+    levelBaseTime = str(r.json()["localTime"])
+except:
+    levelBaseTemperature = None
+    levelBaseHumidity = None
+    levelBaseTime = None
 
 print""
 print "Level One Temperature"
-levelOneTemperature = int(c_to_f(n1.status["shared"][n1.serial]["current_temperature"]))
 print levelOneTemperature
-
 print "Level One Humidity"
-levelOneHumidity = n1.status["device"][n1.serial]["current_humidity"]
 print levelOneHumidity
+
 print ""
-
 print "Level Zero Temperature"
-levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
 print levelZeroTemperature
-
-print""
 print "Level Zero Humidity"
-levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
 print levelZeroHumidity
 
-
+print ""
+print "Level Base Time"
+print levelBaseTime
 print "Level Base Temperature"
-#levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
-print " not yet"
-#displayTemperature(segmentLevelZero,levelZeroTemperature)
-
-print""
-print "Level Base Humidity"
-#levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
-print " not yet"
+print levelBaseTemperature
+print "The value of the webpage temp 
+print levelBaseHumidity
 
 print ""
 print "sending data to the external displays"
 displayTemperature(segmentLevelOne,levelOneTemperature)
 displayTemperature(segmentLevelZero,levelZeroTemperature)
+displayTemperature(segmentLevelBase, levelBaseTemperature)
 time.sleep(4)
 displayHumidity(segmentLevelOne,levelOneHumidity)
 displayHumidity(segmentLevelZero,levelZeroHumidity)
+displayHumidity(segmentLevelBase, levelBaseHumidity)
+time.sleep(4)
+#displayTemperature(segmentLevelZero,levelZeroTemperature)
+#levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
