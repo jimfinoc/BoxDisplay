@@ -247,9 +247,11 @@ def main():
             displayHumidity(segmentLevelBase, levelBaseHumidity)
             print "sleeping for another 4 seconds"
             time.sleep(4)
-            print ""
-            print "initial routine finished"
-            print
+        except:
+            print "cannot write to sensorts"
+        print ""
+        print "initial routine finished"
+        print ""
         if (cmd=="repeat"):
             looping == True
         else
