@@ -50,7 +50,7 @@ class SevenSegment:
     else:
       self.disp.setBufferRow(2, 0)
 
-def setSpecialH(self, charNumber, state=True):
+  def setSpecialH(self, charNumber, state=True):
     "Displays an H on the display. I use this for Humidity"
     self.disp.setBufferRow(charNumber, 0x76)
 
