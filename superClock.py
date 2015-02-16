@@ -93,8 +93,8 @@ def displayHumidity(segment = SevenSegment(address=0x70), humidiity = None):
     else:
         segment.setSpecialH(0) # displays an H in the 0 position
 #        segment.writeDigit(1, int(temperature) % 10, True)  	# blank
-        segment.writeDigit(3, int(humidiity) * 10 % 10)	# Tens
-        segment.writeDigit(4, int(humidiity) * 10 % 10) # Ones
+        segment.writeDigit(3, int(humidiity) / 10)	# Tens
+        segment.writeDigit(4, int(humidiity) % 10) # Ones
         return True
 
 def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
@@ -150,15 +150,16 @@ print levelZeroHumidity
 
 print "Level Base Temperature"
 #levelZeroTemperature =  c_to_f(n0.status["shared"][n0.serial]["current_temperature"])
-print ""
+print " not yet"
 #displayTemperature(segmentLevelZero,levelZeroTemperature)
 
 print""
 print "Level Base Humidity"
 #levelZeroHumidity = n0.status["device"][n0.serial]["current_humidity"]
+print " not yet"
+
 print ""
-
-
+print "sending data to the external displays"
 displayTemperature(segmentLevelOne,levelOneTemperature)
 displayTemperature(segmentLevelZero,levelZeroTemperature)
 time.sleep(4)
