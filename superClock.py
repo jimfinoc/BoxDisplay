@@ -176,7 +176,7 @@ def main():
         n0.login()
     except:
         print " Nest.com intial failure"
-    while loopingQuestion:
+    while (loopingQuestion):
         try:
             print " Getting Status"
             n1.get_status()
