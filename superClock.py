@@ -160,23 +160,24 @@ except:
 
 print""
 print "Level One Temperature"
-myColorText.printColor(str(levelOneTemperature), BLUE)
+myColorText.printColor(str(levelOneTemperature), YELLOW) #colors are for readability
 print "Level One Humidity"
-print levelOneHumidity
+myColorText.printColor(str(levelOneHumidity), YELLOW) #colors are for readability
+
 
 print ""
 print "Level Zero Temperature"
-print levelZeroTemperature
+myColorText.printColor(str(levelZeroTemperature), GREEN) #colors are for readability
 print "Level Zero Humidity"
-print levelZeroHumidity
+myColorText.printColor(str(levelZeroHumidity), GREEN) #colors are for readability
 
 print ""
 print "Level Base Time"
-print levelBaseTime
+myColorText.printColor(str(levelBaseTime), RED) #colors are for readability
 print "Level Base Temperature"
-print levelBaseTemperature
+myColorText.printColor(str(levelBaseTemperature), RED) #colors are for readability
 print "The value of the webpage temp"
-print levelBaseHumidity
+myColorText.printColor(str(levelBaseHumidity), RED) #colors are for readability
 
 print ""
 print "sending temp data to the external displays"
