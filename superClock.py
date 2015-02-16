@@ -142,6 +142,7 @@ def help():
 
 
 def main():
+    print cmd
     parser = create_parser()
     (opts, args) = parser.parse_args()
     if (len(args)==0):
@@ -254,7 +255,6 @@ def main():
         print ""
         print "initial routine finished"
         print ""
-        print cmd
         if (cmd=="repeat"):
             loopingQuestion == True
         else:
