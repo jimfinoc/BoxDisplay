@@ -143,15 +143,15 @@ def help():
 
 def main():
     cmd = ""
-    
+    parser = create_parser()
+    (opts, args) = parser.parse_args()
+
     if (len(args)==0):
         help()
         cmd = "onetime"
     else:
         cmd = args[0]
     print cmd
-    parser = create_parser()
-    (opts, args) = parser.parse_args()
 
     if (cmd=="help"):
         help()
