@@ -14,6 +14,8 @@ import myColorText
 # {"username": "email@somewhere.com", "password": "yourSuperSecretPassword!!!"}
 # all temps from the Nest site are stored in degrees Celsius 
 
+BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8) #for using PrintColor
+
 fileData = open('../passwordFile.json')
 usernameAndPassword = json.load(fileData)
 valueTimeDate = None
@@ -158,7 +160,7 @@ except:
 
 print""
 print "Level One Temperature"
-printColor(str(levelOneTemperature))
+myColorText.printColor(str(levelOneTemperature), BLUE)
 print "Level One Humidity"
 print levelOneHumidity
 
