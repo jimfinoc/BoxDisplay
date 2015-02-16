@@ -138,7 +138,7 @@ def help():
     print "    superClock.py repeat"
     print ""
 
-looping == True
+loopingQuestion == True
 def main():
     parser = create_parser()
     (opts, args) = parser.parse_args()
@@ -174,7 +174,7 @@ def main():
         n0.login()
     except:
         print " Nest.com intial failure"
-    while looping:
+    while loopingQuestion:
         try:
             print " Getting Status"
             n1.get_status()
@@ -253,9 +253,9 @@ def main():
         print "initial routine finished"
         print ""
         if (cmd=="repeat"):
-            looping == True
+            loopingQuestion == True
         else:
-            looping == False
+            loopingQuestion == False
 
 if __name__=="__main__":
     main()
