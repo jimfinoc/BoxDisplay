@@ -245,8 +245,8 @@ def main():
             displayTemperature(segmentLevelZero,levelZeroTemperature)
             displayTemperature(segmentLevelBase, levelBaseTemperature)
             print ""
-            print "sleeping for 4 more seconds"
-            time.sleep(4)
+            print "sleeping for 1 more seconds"
+            time.sleep(1)
             print "sending humid data to the external displays"
             displayHumidity(segmentLevelOne,levelOneHumidity)
             displayHumidity(segmentLevelZero,levelZeroHumidity)
