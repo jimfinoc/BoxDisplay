@@ -238,8 +238,8 @@ def main():
             displayDayMonth(segmentLevelZero,valueTimeDate)
             displayYear(segmentLevelBase, valueTimeDate)
             print""
-            print "sleeping for 4 seconds"
-            time.sleep(4)
+            print "sleeping for 8 seconds"
+            time.sleep(8)
             print "sending temp data to the external displays"
             displayTemperature(segmentLevelOne,levelOneTemperature)
             displayTemperature(segmentLevelZero,levelZeroTemperature)
