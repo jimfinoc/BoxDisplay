@@ -136,6 +136,7 @@ def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
 
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
+    print valueTimeDate
 #    if (valueTimeDate==None):
 #        segment.disp.clear()
 #        return False
