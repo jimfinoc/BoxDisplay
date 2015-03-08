@@ -4,6 +4,7 @@ import urllib2
 import sys
 import json
 import time
+import datetime
 import requests
 from Adafruit_7SegmentPlus import SevenSegment
 from optparse import OptionParser
@@ -106,7 +107,18 @@ def displayHumidity(segment = SevenSegment(address=0x70), humidiity = None):
 
 def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the time on the specific segment"
-
+    segment.disp.clear()
+    if (valueTimeDate==None):
+        segment.writeDigit(2, 0xFFFF)
+#        segment.writeDigit(4, 0xF)
+        return False
+    else:
+        segment.writeDigit(0, int(valueTimeDate.strftime(%Y)[0])) # Thousand
+        segment.writeDigit(1, int(valueTimeDate.strftime(%Y)[1])) # Hundred
+        segment.writeDigit(2, 0)                                  # turn off colon
+        segment.writeDigit(3, int(valueTimeDate.strftime(%Y)[2])) # Ten
+        segment.writeDigit(4, int(valueTimeDate.strftime(%Y)[3])) # Ones
+        return True
 def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the day and month on the specific segment"
 
@@ -168,6 +180,9 @@ def main():
         print "could not initalize the three seven segment displays"
         sys.exit(-1)
 
+    print ""
+    print "Get the current Time"
+    valueTimeDate = datetime.datetime.today()
     print ""
     print "Trying to get data from the Nest Web"
     try:
@@ -236,9 +251,9 @@ def main():
             print "Sending time data to the external displays"
             displayTime(segmentLevelOne,valueTimeDate)
             displayDayMonth(segmentLevelZero,valueTimeDate)
-            displayYear(segmentLevelBase, valueTimeDate)
+            displayYear(segmentLevelBase, valueTimeDate.strftime)
             print""
-            print "sleeping for 8 seconds"
+            print "sleeping for 4 seconds"
             time.sleep(4)
             print "sending temp data to the external displays"
             displayTemperature(segmentLevelOne,levelOneTemperature)
