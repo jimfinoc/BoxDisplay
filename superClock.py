@@ -116,7 +116,8 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
     else:
         segment.writeDigit(0, int(valueTimeDate.strftime('%H')[0])) # Thousand
         segment.writeDigit(1, int(valueTimeDate.strftime('%H')[1])) # Hundred
-        segment.writeDigit(2, 0xFFFF)                               # turn off colon
+#        segment.writeDigit(2, 0xFFFF)                               # turn on colon
+        segment.writeDigit(2, 0)                               # turn on colon
         segment.writeDigit(3, int(valueTimeDate.strftime('%M')[0])) # Ten
         segment.writeDigit(4, int(valueTimeDate.strftime('%M')[1])) # Ones
         return True
