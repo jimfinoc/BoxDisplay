@@ -231,9 +231,6 @@ def main():
         sys.exit(-1)
 
     print ""
-    print "Get the current Time"
-    valueTimeDate = datetime.datetime.now(EST)
-    print ""
     print "Trying to get data from the Nest Web"
     try:
         print "My Nest Data"
@@ -243,9 +240,16 @@ def main():
         n1.login()
         n0.login()
     except:
-        print " Nest.com intial failure"
+        print " Nest.com failure"
     loopingQuestion = True
     while (loopingQuestion):
+        print ""
+        print "In the Loop"
+        print ""
+        print "Get the current Time"
+        valueTimeDate = datetime.datetime.now(EST)
+        print valueTimeDate
+        print ""
         try:
             print " Getting Status"
             n1.get_status()
