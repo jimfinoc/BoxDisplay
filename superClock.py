@@ -1,4 +1,5 @@
 #This is My Nest but it will slowly be converted to superClock!
+
 import urllib
 import urllib2
 import sys
@@ -109,7 +110,7 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the time on the specific segment"
     segment.disp.clear()
     if (valueTimeDate==None):
-        segment.clear()
+        segment.disp.clear()
         return False
     else:
         segment.writeDigit(0, int(valueTimeDate.strftime('%H')[0])) # Thousand
@@ -118,6 +119,7 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
         segment.writeDigit(3, int(valueTimeDate.strftime('%M')[0])) # Ten
         segment.writeDigit(4, int(valueTimeDate.strftime('%M')[1])) # Ones
         return True
+
 def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the day and month on the specific segment"
 
