@@ -233,20 +233,20 @@ def main():
             print " cannot print in color"
         try:
             print ""
-            print "Sending temp data to the external displays"
+            print "Sending time data to the external displays"
             displayTime(segmentLevelOne,valueTimeDate)
             displayDayMonth(segmentLevelZero,valueTimeDate)
             displayYear(segmentLevelBase, valueTimeDate)
             print""
             print "sleeping for 8 seconds"
-            time.sleep(8)
+            time.sleep(4)
             print "sending temp data to the external displays"
             displayTemperature(segmentLevelOne,levelOneTemperature)
             displayTemperature(segmentLevelZero,levelZeroTemperature)
             displayTemperature(segmentLevelBase, levelBaseTemperature)
             print ""
-            print "sleeping for 1 more seconds"
-            time.sleep(1)
+            print "sleeping for 4 more seconds"
+            time.sleep(4)
             print "sending humid data to the external displays"
             displayHumidity(segmentLevelOne,levelOneHumidity)
             displayHumidity(segmentLevelZero,levelZeroHumidity)
