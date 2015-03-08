@@ -121,17 +121,17 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
         segment.writeDigit(4, int(valueTimeDate.strftime('%M')[1])) # Ones
         return True
 
-def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
+def displayMonthDay(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the day and month on the specific segment"
     if (valueTimeDate==None):
         segment.disp.clear()
         return False
     else:
-        segment.writeDigit(0, int(valueTimeDate.strftime('%m')[0])) # Thousand
-        segment.writeDigit(1, int(valueTimeDate.strftime('%m')[1])) # Hundred
+        segment.writeDigit(0, int(valueTimeDate.strftime('%m')[0])) # month tens
+        segment.writeDigit(1, int(valueTimeDate.strftime('%m')[1]),True) # month plus a decimal
 #        segment.writeDigit(2, 0xFFFF)                               # turn off colon
-        segment.writeDigit(3, int(valueTimeDate.strftime('%d')[0])) # Ten
-        segment.writeDigit(4, int(valueTimeDate.strftime('%d')[1])) # Ones
+        segment.writeDigit(3, int(valueTimeDate.strftime('%d')[0])) # day tens
+        segment.writeDigit(4, int(valueTimeDate.strftime('%d')[1])) # day
         return True
 
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
@@ -273,7 +273,7 @@ def main():
             print ""
             print "Sending time data to the external displays"
             displayTime(segmentLevelOne,valueTimeDate)
-            displayDayMonth(segmentLevelZero,valueTimeDate)
+            displayMonthDay(segmentLevelZero,valueTimeDate)
             displayYear(segmentLevelBase, valueTimeDate)
             print""
             print "sleeping for 4 seconds"
