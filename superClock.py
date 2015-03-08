@@ -259,7 +259,7 @@ def main():
             print ""
             print "Sending time data to the external displays"
             displayTime(segmentLevelOne,valueTimeDate.strftime)
-            displayDayMonth(segmentLevelZero,valueTimeDate.strftime)
+#            displayDayMonth(segmentLevelZero,valueTimeDate.strftime)
             displayYear(segmentLevelBase, valueTimeDate.strftime)
             print""
             print "sleeping for 4 seconds"
@@ -278,7 +278,7 @@ def main():
             print "sleeping for another 4 seconds"
             time.sleep(4)
         except:
-            print "cannot write to sensorts"
+            print "cannot write to sensors"
         print ""
         print "initial routine finished"
         print ""
