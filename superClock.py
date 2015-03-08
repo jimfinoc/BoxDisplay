@@ -26,6 +26,32 @@ valueTimeDate = None
 #print "username:" + str(usernameAndPassword['username'])
 #print "password:" + str(usernameAndPassword['password'])
 
+
+print "Press CTRL+Z to exit"
+
+class Zone(datetime.tzinfo):
+    def __init__(self,offset,isdst,name):
+        self.offset = offset
+        self.isdst = isdst
+        self.name = name
+    def utcoffset(self, dt):
+        return datetime.timedelta(hours=self.offset) + self.dst(dt)
+    def dst(self, dt):
+        return datetime.timedelta(hours=1) if self.isdst else datetime.timedelta(0)
+    def tzname(self,dt):
+        return self.name
+
+GMT = Zone(0,False,'GMT')
+# True if DST is on
+# Fales if now DST
+EST = Zone(-5,True,'EST')
+
+print datetime.datetime.utcnow().strftime('%m/%d/%Y %H:%M:%S %Z')
+print datetime.datetime.now(GMT).strftime('%m/%d/%Y %H:%M:%S %Z')
+print datetime.datetime.now(EST).strftime('%m/%d/%Y %H:%M:%S %Z')
+
+
+
 def c_to_f(c):
         return c * 9.0 / 5.0 + 32.0
 
@@ -206,7 +232,7 @@ def main():
 
     print ""
     print "Get the current Time"
-    valueTimeDate = datetime.datetime.today()
+    valueTimeDate = datetime.datetime.now(EST)
     print ""
     print "Trying to get data from the Nest Web"
     try:
