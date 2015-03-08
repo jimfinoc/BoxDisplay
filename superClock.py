@@ -249,7 +249,7 @@ def main():
         print "Get the current Time"
         valueTimeDate = datetime.datetime.now(EST)
         print valueTimeDate
-            try:
+        try:
             print ""
             print "Sending time data to the external displays"
             displayTime(segmentLevelOne,valueTimeDate)
