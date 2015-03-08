@@ -109,8 +109,23 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the time on the specific segment"
     segment.disp.clear()
     if (valueTimeDate==None):
-        segment.writeDigit(2, 0xFFFF)
-#        segment.writeDigit(4, 0xF)
+        segment.clear()
+        return False
+    else:
+        segment.writeDigit(0, int(valueTimeDate.strftime('%H')[0])) # Thousand
+        segment.writeDigit(1, int(valueTimeDate.strftime('%H')[1])) # Hundred
+        segment.writeDigit(2, 0xFFFF)                               # turn off colon
+        segment.writeDigit(3, int(valueTimeDate.strftime('%M')[0])) # Ten
+        segment.writeDigit(4, int(valueTimeDate.strftime('%M')[1])) # Ones
+        return True
+def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
+    "this will display the day and month on the specific segment"
+
+def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
+    "this will display the year on the specific segment"
+    segment.disp.clear()
+    if (valueTimeDate==None):
+        segment.clear()
         return False
     else:
         segment.writeDigit(0, int(valueTimeDate.strftime('%Y')[0])) # Thousand
@@ -119,12 +134,6 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
         segment.writeDigit(3, int(valueTimeDate.strftime('%Y')[2])) # Ten
         segment.writeDigit(4, int(valueTimeDate.strftime('%Y')[3])) # Ones
         return True
-def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
-    "this will display the day and month on the specific segment"
-
-def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
-    "this will display the year on the specific segment"
-
 def create_parser():
     parser = OptionParser(usage="superClock [options] command [command_options] [command_args]",
                           description="Commands: help",
@@ -249,8 +258,8 @@ def main():
         try:
             print ""
             print "Sending time data to the external displays"
-            displayTime(segmentLevelOne,valueTimeDate)
-            displayDayMonth(segmentLevelZero,valueTimeDate)
+            displayTime(segmentLevelOne,valueTimeDate.strftime)
+            displayDayMonth(segmentLevelZero,valueTimeDate.strftime)
             displayYear(segmentLevelBase, valueTimeDate.strftime)
             print""
             print "sleeping for 4 seconds"
