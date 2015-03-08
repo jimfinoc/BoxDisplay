@@ -249,6 +249,17 @@ def main():
         print "Get the current Time"
         valueTimeDate = datetime.datetime.now(EST)
         print valueTimeDate
+            try:
+            print ""
+            print "Sending time data to the external displays"
+            displayTime(segmentLevelOne,valueTimeDate)
+            displayMonthDay(segmentLevelZero,valueTimeDate)
+            displayYear(segmentLevelBase, valueTimeDate)
+            print""
+            print "sleeping for 4 seconds"
+            time.sleep(4)
+        except:
+            print "cannot write time to sensors"
         print ""
         try:
             print " Getting Status"
@@ -301,14 +312,6 @@ def main():
         except:
             print " cannot print in color"
         try:
-            print ""
-            print "Sending time data to the external displays"
-            displayTime(segmentLevelOne,valueTimeDate)
-            displayMonthDay(segmentLevelZero,valueTimeDate)
-            displayYear(segmentLevelBase, valueTimeDate)
-            print""
-            print "sleeping for 4 seconds"
-            time.sleep(4)
             print "sending temp data to the external displays"
             displayTemperature(segmentLevelOne,levelOneTemperature)
             displayTemperature(segmentLevelZero,levelZeroTemperature)
@@ -323,7 +326,7 @@ def main():
             print "sleeping for another 4 seconds"
             time.sleep(4)
         except:
-            print "cannot write to sensors"
+            print "cannot write temp or humidity data to sensors"
         print ""
         print "initial routine finished"
         print ""
