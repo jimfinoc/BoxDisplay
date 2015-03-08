@@ -136,16 +136,16 @@ def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
 
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
-    if (valueTimeDate==None):
-        segment.disp.clear()
-        return False
-    else:
-        segment.writeDigit(0, int(valueTimeDate.strftime('%Y')[0])) # Thousand
-        segment.writeDigit(1, int(valueTimeDate.strftime('%Y')[1])) # Hundred
-        segment.writeDigit(2, 0)                                    # turn off colon
-        segment.writeDigit(3, int(valueTimeDate.strftime('%Y')[2])) # Ten
-        segment.writeDigit(4, int(valueTimeDate.strftime('%Y')[3])) # Ones
-        return True
+#    if (valueTimeDate==None):
+#        segment.disp.clear()
+#        return False
+#    else:
+#        segment.writeDigit(0, int(valueTimeDate.strftime('%Y')[0])) # Thousand
+#        segment.writeDigit(1, int(valueTimeDate.strftime('%Y')[1])) # Hundred
+#        segment.writeDigit(2, 0)                                    # turn off colon
+#        segment.writeDigit(3, int(valueTimeDate.strftime('%Y')[2])) # Ten
+#        segment.writeDigit(4, int(valueTimeDate.strftime('%Y')[3])) # Ones
+#        return True
 
 def create_parser():
     parser = OptionParser(usage="superClock [options] command [command_options] [command_args]",
