@@ -272,9 +272,9 @@ def main():
         try:
             print ""
             print "Sending time data to the external displays"
-#            displayTime(segmentLevelOne,valueTimeDate.strftime)
-#            displayDayMonth(segmentLevelZero,valueTimeDate.strftime)
-            displayYear(segmentLevelBase, valueTimeDate.strftime)
+            displayTime(segmentLevelOne,valueTimeDate)
+            displayDayMonth(segmentLevelZero,valueTimeDate)
+            displayYear(segmentLevelBase, valueTimeDate)
             print""
             print "sleeping for 4 seconds"
             time.sleep(4)
