@@ -123,7 +123,6 @@ def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
 
 def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the day and month on the specific segment"
-    segment.disp.clear()
     if (valueTimeDate==None):
         segment.disp.clear()
         return False
@@ -137,7 +136,6 @@ def displayDayMonth(segment = SevenSegment(address=0x70),valueTimeDate = None):
 
 def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
     "this will display the year on the specific segment"
-    segment.disp.clear()
     if (valueTimeDate==None):
         segment.disp.clear()
         return False
@@ -148,6 +146,7 @@ def displayYear(segment = SevenSegment(address=0x70),valueTimeDate = None):
         segment.writeDigit(3, int(valueTimeDate.strftime('%Y')[2])) # Ten
         segment.writeDigit(4, int(valueTimeDate.strftime('%Y')[3])) # Ones
         return True
+
 def create_parser():
     parser = OptionParser(usage="superClock [options] command [command_options] [command_args]",
                           description="Commands: help",
