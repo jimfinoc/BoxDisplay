@@ -51,7 +51,6 @@ class MCP9808(object):
 	"""Class to represent an Adafruit MCP9808 precision temperature measurement
 	board.
 	"""
-
 	def __init__(self, address=MCP9808_I2CADDR_DEFAULT, i2c=None, **kwargs):
 		"""Initialize MCP9808 device on the specified I2C address and bus number.
 		Address defaults to 0x18 and bus number defaults to the appropriate bus
@@ -62,8 +61,6 @@ class MCP9808(object):
 			import Adafruit_GPIO.I2C as I2C
 			i2c = I2C
 		self._device = i2c.get_i2c_device(address, **kwargs)
-
-
 	def begin(self):
 		"""Start taking temperature measurements. Returns True if the device is 
 		intialized, False otherwise.
@@ -74,7 +71,6 @@ class MCP9808(object):
 		self._logger.debug('Read manufacturer ID: {0:04X}'.format(mid))
 		self._logger.debug('Read device ID: {0:04X}'.format(did))
 		return mid == 0x0054 and did == 0x0400
-
 	def readTempC(self):
 		"""Read sensor and return its value in degrees celsius."""
 		# Read temperature register value.
@@ -85,4 +81,3 @@ class MCP9808(object):
 		if t & 0x1000:
 			temp -= 256.0
 		return temp
-

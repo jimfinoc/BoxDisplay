@@ -49,3 +49,24 @@ class SevenSegment:
       self.disp.setBufferRow(2, 0xFFFF)
     else:
       self.disp.setBufferRow(2, 0)
+
+  def setSpecialH(self, charNumber, state=True):
+    "Displays an H on the display. I use this for Humidity"
+    self.disp.setBufferRow(charNumber, 0x76)
+
+#
+#class FullDisplaySevenSegment:
+#    def __init__(self, address=0x70, debug=False):
+#    if (debug):
+#        print "Initializing a new instance of LEDBackpack at 0x%02X" % address
+#        self.segment = SevenSegment(address=address)
+#        self.segment.disp.setBrightness(10)
+#        self.segment.disp.clear()
+#
+#    def displayMessage(messageString):
+#        self.segment.writeDigit(0,str(messageString))
+#        self.segment.writeDigit(0)
+#        self.segment.writeDigit(0)
+#        self.segment.writeDigit(0)
+#
+#
