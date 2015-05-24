@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-#This is My Nest but it will slowly be converted to superClock!
-
->>>>>>> origin/master
 import urllib
 import urllib2
 import sys
