@@ -118,17 +118,18 @@ def displayTemperature(segment = SevenSegment(address=0x70), temperature = None)
         segment.writeDigit(4, 0xF)					        # F
         return True
 
-def displayHumidity(segment = SevenSegment(address=0x70), humidiity = None):
-    "this will display the humidiity on the specific segment"
+def displayHumidity(segment = SevenSegment(address=0x70), humidity = None):
+    "this will display the humidity on the specific segment"
     segment.disp.clear()
-    if (humidiity==None):
-        segment.writeDigit(0, 0xF)
+    if (humidity==None):
+#        segment.writeDigit(0, 0xF)
+        segment.setSpecialH(0)
         return False
     else:
         segment.setSpecialH(0) # displays an H in the 0 position
 #        segment.writeDigit(1, int(temperature) % 10, True)  	# blank
-        segment.writeDigit(3, int(humidiity) / 10)	# Tens
-        segment.writeDigit(4, int(humidiity) % 10) # Ones
+        segment.writeDigit(3, int(humidity) / 10)	# Tens
+        segment.writeDigit(4, int(humidity) % 10) # Ones
         return True
 
 def displayTime(segment = SevenSegment(address=0x70),valueTimeDate = None):
