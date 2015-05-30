@@ -326,6 +326,15 @@ def main():
             time.sleep(4)
         except:
             print "cannot write temp or humidity data to sensors"
+        try:
+            with open('/var/www/index.html', 'w') as f:
+                x = {"test data": 0}
+#                x = {"Local ip": localip, 'Local Time' : datetime.datetime.now(EST).strftime('%m/%d/%Y %H:%M:%S %Z') , 'Temperature' : tempInF , "Location": "Basement"}
+                json.dump(x,f)
+            f.closed
+        except:
+            print "cannot open file at /var/www/index.html"
+
         print ""
         print "initial routine finished"
         print ""
