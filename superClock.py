@@ -278,7 +278,7 @@ def main():
         print "Getting data from the internal web device"
         try:
             print " getting the date from the site"
-            r = requests.get("http://10.0.1.211")
+            r = requests.get("http://raspberrypi4.local")
             print " pulling values"
             levelBaseTemperature = float(r.json()["temperature"])
             levelBaseHumidity = float(r.json()["humidity"])
@@ -328,7 +328,7 @@ def main():
             print "cannot write temp or humidity data to sensors"
         try:
             with open('/var/www/index.html', 'w') as f:
-                x = {"test data": 0}
+                x = {"Local Time": valueTimeDate, "Level One Temperature": levelOneTemperature, "Level Zero Temperature": levelZeroTemperature,}
 #                x = {"Local ip": localip, 'Local Time' : datetime.datetime.now(EST).strftime('%m/%d/%Y %H:%M:%S %Z') , 'Temperature' : tempInF , "Location": "Basement"}
                 json.dump(x,f)
             f.closed
