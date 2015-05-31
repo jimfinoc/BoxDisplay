@@ -286,9 +286,9 @@ def main():
             print " getting the date from the site"
             r = requests.get("http://10.0.1.214")
             print " pulling values"
-            levelBaseTemperature = float(r.json()["temperature"])
-            levelBaseHumidity = float(r.json()["humidity"])
-            levelBaseTime = str(r.json()["localTime"])
+            levelBaseTemperature = float(r.json()["Temperature"])
+            levelBaseHumidity = float(r.json()["Tumidity"])
+            levelBaseTime = str(r.json()["Local Time"])
         except:
             print " setting Level Base to None"
             levelBaseTemperature = None
