@@ -287,6 +287,7 @@ def main():
             print " getting the data from the site: ", website
             r = requests.get(website)
             print " pulling values"
+            try:
                 levelBaseTemperature = str(r.json()["Temperature"])
             except:
                 levelBaseTemperature = None
