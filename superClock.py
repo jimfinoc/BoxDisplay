@@ -283,17 +283,23 @@ def main():
         print ""
         print "Getting data from the internal web device"
         try:
-            print " getting the date from the site"
-            r = requests.get("http://10.0.1.214")
+            website = "http://10.0.1.214"
+            print " getting the data from the site: ", website
+            r = requests.get(website)
             print " pulling values"
-            levelBaseTemperature = float(r.json()["Temperature"])
-            levelBaseHumidity = float(r.json()["Tumidity"])
-            levelBaseTime = str(r.json()["Local Time"])
+                levelBaseTemperature = str(r.json()["Temperature"])
+            except:
+                levelBaseTemperature = None
+            try:
+                levelBaseHumidity = str(r.json()["Humidity"])
+            except:
+                levelBaseHumidity = None
+            try:
+                levelBaseTime = str(r.json()["Local Time"])
+            except:
+                levelBaseTime = None
         except:
-            print " setting Level Base to None"
-            levelBaseTemperature = None
-            levelBaseHumidity = None
-            levelBaseTime = None
+            print " error pulling data from ", website
         try:
             print ""
             print "trying to use color output"
