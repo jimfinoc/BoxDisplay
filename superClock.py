@@ -205,7 +205,11 @@ def main():
     cmd = ""
     parser = create_parser()
     (opts, args) = parser.parse_args()
-
+    try:
+#            localip = socket.gethostbyname(socket.gethostname())
+        localip = commands.getoutput("hostname -I")
+    except:
+        localip = "No ip addr"
     if (len(args)==0):
         help()
         cmd = "onetime"
@@ -328,7 +332,7 @@ def main():
             print "cannot write temp or humidity data to sensors"
         try:
             with open('/var/www/index.html', 'w') as f:
-                x = {"Local Time": valueTimeDate, "Level One Temperature": levelOneTemperature, "Level Zero Temperature": levelZeroTemperature,}
+                x = {"Local ip": localip,"Local Time": datetime.datetime.now(EST).strftime('%m/%d/%Y %H:%M:%S %Z') ,"Level One Temperature": levelOneTemperature,"Level One Humidity": levelOneHumidity,"Level Zero Temperature": levelZeroTemperature,"Level Zero Humidity": levelZeroHumidity,}
 #                x = {"Local ip": localip, 'Local Time' : datetime.datetime.now(EST).strftime('%m/%d/%Y %H:%M:%S %Z') , 'Temperature' : tempInF , "Location": "Basement"}
                 json.dump(x,f)
             f.closed
