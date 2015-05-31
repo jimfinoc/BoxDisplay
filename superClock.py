@@ -288,11 +288,11 @@ def main():
             r = requests.get(website)
             print " pulling values"
             try:
-                levelBaseTemperature = str(r.json()["Temperature"])
+                levelBaseTemperature = float(r.json()["Temperature"])
             except:
                 levelBaseTemperature = None
             try:
-                levelBaseHumidity = str(r.json()["Humidity"])
+                levelBaseHumidity = float(r.json()["Humidity"])
             except:
                 levelBaseHumidity = None
             try:
