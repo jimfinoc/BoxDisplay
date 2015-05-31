@@ -8,6 +8,7 @@ import requests
 from Adafruit_7SegmentPlus import SevenSegment
 from optparse import OptionParser
 import myColorText
+import commands
 
 
 # Make sure your higher level directory has the JSON file called passwordFile.json
