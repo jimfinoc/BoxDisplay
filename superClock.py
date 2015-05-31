@@ -284,7 +284,7 @@ def main():
         print "Getting data from the internal web device"
         try:
             print " getting the date from the site"
-            r = requests.get("http://raspberrypi4.local")
+            r = requests.get("http://10.0.1.214")
             print " pulling values"
             levelBaseTemperature = float(r.json()["temperature"])
             levelBaseHumidity = float(r.json()["humidity"])
