@@ -210,6 +210,7 @@ def main():
         localip = commands.getoutput("hostname -I")
     except:
         localip = "No ip addr"
+    print localip
     if (len(args)==0):
         help()
         cmd = "onetime"
